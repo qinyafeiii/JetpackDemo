@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // 用于生成Java文件的库
+    implementation 'com.squareup:javapoet:1.7.0'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc4'
+    implementation 'com.google.auto.service:auto-service:1.0-rc4'
+    compileOnly files ('C:/Program Files/Java/jdk1.8.0_152/jre/lib/rt.jar')
+}
+
+//jdk版本
+sourceCompatibility = "8"
+targetCompatibility = "8"

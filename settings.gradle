@@ -1,0 +1,2 @@
+include ':app', ':libnvcompiler'
+rootProject.name='LearnJetpack'
