@@ -1,16 +1,23 @@
 package com.example.learnjetpack;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.learnjetpack.ui.home.HomeViewModel;
+import com.example.learnjetpack.viewmodels.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+    private final static String TAG = "QYF_MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +32,20 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        // 1
-        // 2
-        // 3
-        // 4
+
+        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel.getUserData().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.e(TAG, "onChanged: " + s);
+            }
+        });
+        userViewModel.getProgeressData().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Log.e(TAG, "onChanged: " + integer);
+            }
+        });
     }
 
 }
